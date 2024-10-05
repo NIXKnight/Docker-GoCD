@@ -1,0 +1,12 @@
+services:
+  gocd-server:
+    image: gocd/gocd-server:v24.3.0
+    ports:
+      - '8153:8153'
+      - '8154:8154'
+  gocd-agent:
+    image: gocd/gocd-agent-debian-12:v24.3.0
+    environment:
+      GO_SERVER_URL: https://gocd-server:8154/go
+    depends_on:
+      - gocd-server
